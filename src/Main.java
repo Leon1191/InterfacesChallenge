@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
@@ -28,5 +29,42 @@ public class Main {
 //        There is a whole Java I/0 section later in the course where you will get to use files, etc.
 
 
+        ISaveable leo = new Player("Leo", 100, 5.5,7);
+        System.out.println(leo.toString());
+        save(leo);
+//        load(leo);
+//        System.out.println(leo.toString());
+        ISaveable zombie = new Monster("Zombie", 50,2.2);
+        System.out.println(zombie.toString());
+        save(zombie);
+//        load(zombie);
+//        System.out.println(zombie.toString());
+    }
+   static void save(ISaveable person){
+        for (int i = 0; i < person.save().size(); i++){
+            System.out.println("Save " + person.save().get(i));
+        }
+    }
+   static ArrayList<String> addValues(){
+        ArrayList<String> values = new ArrayList<String>();
+        boolean flag = true;
+        Scanner scanner = new Scanner(System.in);
+        while(flag){
+            System.out.println("1 - write value\n2 - exit");
+           int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch(choice){
+                case 1:
+                    System.out.println("Write value");
+                    values.add(scanner.nextLine());
+                    break;
+                case 2: flag = false;
+                    break;
+            }
+        }
+        return values;
+    }
+    static void load(ISaveable person){
+        person.load(addValues());
     }
 }
